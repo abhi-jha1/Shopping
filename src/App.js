@@ -1,26 +1,35 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { Component } from 'react';
+import Category from './components/Category';
+import Home from './components/Home'
+import { items } from './components/data';
+import Slider from './components/slider'
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+
+class App extends Component {
+
+  state = {
+    items: items
+  }
+
+  onShoes = (arg) => {
+    const data = items.filter((item) => item.category == arg);
+    console.log(data, 'data');
+    this.setState({ items: data });
+  }
+
+
+
+  render() {
+    return (
+      <div>
+        <Slider />
+        <Category click={this.onShoes} />
+        <Home items={this.state.items} />
+      </div>
+
+
+    );
+  }
 }
 
 export default App;
