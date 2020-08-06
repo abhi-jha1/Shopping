@@ -11,10 +11,16 @@ class App extends Component {
     items: items
   }
 
-  onShoes = (arg) => {
+  click = (arg) => {
     const data = items.filter((item) => item.category == arg);
     console.log(data, 'data');
     this.setState({ items: data });
+  }
+
+  slider = (arg) => {
+    const data = this.state.items.filter((item) => item.price < 40);
+    this.setState({ items: data });
+    console.log('slider called');
   }
 
 
@@ -22,8 +28,8 @@ class App extends Component {
   render() {
     return (
       <div>
-        <Slider />
-        <Category click={this.onShoes} />
+        <Slider slider={this.slider} />
+        <Category click={this.click} />
         <Home items={this.state.items} />
       </div>
 
